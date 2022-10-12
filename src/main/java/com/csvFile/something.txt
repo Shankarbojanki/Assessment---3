@@ -1,0 +1,46 @@
+"["  + "\n" +
+               "{" + "\n" +
+                 "role :Team manager ," +"\n" +
+                 "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+               "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "{" + "\n" +
+                "role :Team manager ," +"\n" +
+                "Average salary :"+employeeService.avgTeamManagerSalary() +"\n"+
+                "}" + "\n" +
+                "]";

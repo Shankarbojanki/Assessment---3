@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +16,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.web.multipart.MultipartFile;
 
-import static java.sql.Timestamp.valueOf;
-import static java.util.Date.*;
+
 
 public class CSVHelper {
 
@@ -76,7 +77,9 @@ public class CSVHelper {
                 }
 
                 try {
-                    employee.setJoined_on(valueOf(csvRecord.get("joined_on")));
+                    Date d = cDateFormat(csvRecord.get("joined_on"));
+
+                    employee.setJoined_on(d);
                 } catch (Exception e) {
                     joined_on = null;
                 }
@@ -102,6 +105,16 @@ public class CSVHelper {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
 
+
+    }
+    public static Date cDateFormat(String date) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.parse(date);
+        }catch (ParseException e) {
+            throw new RuntimeException(e);
+
+        }
 
     }
 

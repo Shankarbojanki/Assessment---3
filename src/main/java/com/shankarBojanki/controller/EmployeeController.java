@@ -65,20 +65,15 @@ public class EmployeeController {
         return employees;
     }
 
+
     @GetMapping("/pagination")
-    private APIResponse<Page<Employee>> getEmployeesWithPagination(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize) {
-        Page<Employee> employeesWithPagination = employeeService.findUsersWithPagination(pageNumber, pageSize);
+    private APIResponse<Page<Employee>> getEmployeesWithPagination(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize ,@RequestParam("field") String field) {
+        Page<Employee> employeesWithPagination = employeeService.findUsersWithPagination(pageNumber, pageSize,field);
         return new APIResponse<>(employeesWithPagination.getSize(), employeesWithPagination);
     }
 
 
-    @GetMapping("/sorting/{field}")
-    private List<Employee> getEmployeesWithSorting(@PathVariable String field){
-        List<Employee> alEmployeeList=employeeService.findEmployeesWithSorting(field);
-        return alEmployeeList;
 
-
-    }
 
     @GetMapping("/employee/first_name")
     public ResponseEntity<List<Employee>> getEmployeeswithfirstName(@RequestParam String first_name){
@@ -96,27 +91,54 @@ public class EmployeeController {
         return new ResponseEntity<List<Employee>>(employeeRepository.findBySalary(salery),HttpStatus.OK);
     }
 
-    @GetMapping("/employeescount")
-    public ResponseEntity<List<Employee>> getEmployeeCount(){
-        return new ResponseEntity<List<Employee>>(employeeRepository.findCountofAllEmployees(),HttpStatus.OK);
+
+//    @GetMapping("/experience")
+//    public ResponseEntity<List<Employee>> getExperienceByYears(@RequestParam String field){
+//        return new ResponseEntity<List<Employee>> (employeeRepository.findByExperience(field),HttpStatus.OK);
+//    }
+
+
+    @GetMapping("/experience")
+    public List<Employee> getExperienceByYears(){
+        return  employeeRepository.findByExperience();
     }
 
 
 
 
-    @GetMapping("/avgTeamManagerSalary")
-    public int getTeamManagersalary() {
-        int avgTeamManagerSalaryMsalary =employeeService.avgSE1Salary();
-        return avgTeamManagerSalaryMsalary;
+    @PutMapping("/updateEmployee/{id}")
+    public Employee updateEmployee(@PathVariable("id") Long id,
+                                       @RequestBody Employee employee) {
+        return employeeService.updateEmployee(id,employee);
     }
 
 
+    @DeleteMapping("/deleteEmployee/{id}")
+    public String deleteEmployeeById(@PathVariable("id") Long id) {
+        employeeService.deleteEmployeeById(id);
+        return "Employee deleted Successfully!!";
+    }
 
+//    @GetMapping("AllRolesAverageSalary")
+//    public String AllRolesAverageSalary(){
+//        return "Team manager salary "+employeeService.avgTeamManagerSalary() + "\n" +
+//                "Accountant salary "+employeeService.avgAccountantSalary()+ "\n" +
+//                "Salers Manager salary "+employeeService.avgSalersManagerSalary()+ "\n" +
+//                "SE3 salary "+employeeService.avgSE3Salary()+ "\n" +
+//                "Tech Lead salary "+employeeService.avgTechLeadSalary()+ "\n" +
+//                "SE2 salary "+employeeService.avgSE2Salary()+ "\n" +
+//                "SE1 salary "+employeeService.avgSE1Salary()+ "\n" +
+//                "System Admin salary "+employeeService.avgSystemAdminSalary()+ "\n" +
+//                "Project Manager salary "+employeeService.avgProjectManagerSalary()+ "\n" +
+//                "SSE1 salary "+employeeService.avgSSE1Salary()+ "\n" +
+//                "SSE2 salary "+employeeService.avgSSE2Salary();
+//    }
 
 
     @GetMapping("AllRolesAverageSalary")
     public String AllRolesAverageSalary(){
-        return "Team manager salary "+employeeService.avgTeamManagerSalary() + "\n" +
+        return
+                "Team manager salary "+employeeService.avgTeamManagerSalary() + "\n" +
                 "Accountant salary "+employeeService.avgAccountantSalary()+ "\n" +
                 "Salers Manager salary "+employeeService.avgSalersManagerSalary()+ "\n" +
                 "SE3 salary "+employeeService.avgSE3Salary()+ "\n" +
@@ -129,7 +151,22 @@ public class EmployeeController {
                 "SSE2 salary "+employeeService.avgSSE2Salary();
     }
 
+    @GetMapping("/AllRolesCount")
+    public String AllRolesCount(){
+        return "all roles  count " + "\n" +
+               "TeamManager"+employeeService.CountTeamManager()+ "\n" +
+                "Accountant"+ employeeService.CountAccountant()+ "\n" +
+                "SalersManager"+employeeService.CountSalersManager()+ "\n" +
+                "SE3"+employeeService.CountSE3()+ "\n" +
+                "TechLead"+employeeService.CountTechLead()+ "\n" +
+                "SE2"+employeeService.CountSE2()+ "\n" +
+                "SE1"+employeeService.CountSE1()+ "\n" +
+                "SystemAdmin"+employeeService.CountSystemAdmin()+ "\n" +
+                "ProjectManager"+employeeService.CountProjectManager()+ "\n" +
+                "SSE1"+employeeService.CountSSE1()+ "\n" +
+                "SSE2"+employeeService.CountSSE2();
 
+    }
 
 
 
@@ -145,4 +182,3 @@ public class EmployeeController {
 
 
 
-//id,first_name,last_name,email,gender,joined_on,salery,role
